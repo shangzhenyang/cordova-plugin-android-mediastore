@@ -1,7 +1,9 @@
 # cordova-plugin-android-mediastore
-This simple Cordova plugin converts a base64 `image/png` bytestring to an image file and adds it to the gallery.
+This simple Cordova plugin converts a base64 bytestring to an image file and adds it to the gallery. It supports `image/png`, `image/jpeg`, and `image/webp`.
 
-Tested on Android APIs 22(5.1 Lollipop), 29(10 Q) and 30(11 R).
+This fork adds the support for `image/jpeg` and `image/webp`. It will infer the MIME type based on the file extension.
+
+Tested on Android APIs 22 (5.1 Lollipop), 29 (10 Q) and 30 (11 R).
 
 Useful when capturing an HTML canvas.
 
@@ -14,17 +16,17 @@ The plugin exports only one function:
 /**
  * @param byteString the bytestring part of the base64 dataURI (excludes the MIME part, see the example)
  * @param fileDir the relative directory to save the file to.
- * @param fileName 
+ * @param fileName
  */
 exports.store = function (byteString, fileDir, fileName, success, error) {
-    exec(success, error, 
-        'CordovaAndroidMediaStore', 
-        'store', 
+    exec(success, error,
+        'CordovaAndroidMediaStore',
+        'store',
         [byteString, fileDir, fileName]);
 };
 ```
 
-## example
+## Example
 ```typescript
 let dataURItoGallery: (dataURI: string) => Blob = (dataURI) => {
     // Get bytestring part of the image dataURI
